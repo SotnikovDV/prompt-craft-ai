@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /* Брендовые кнопки */
+    .btn-brand {
+        @apply border border-blue-300 bg-gradient-to-r from-blue-500 to-orange-500 text-white font-semibold rounded-lg transition-all duration-500 shadow-lg;
+    }
+
+    .btn-brand:hover {
+        @apply bg-gradient-to-r from-blue-600 to-orange-600 shadow-xl transform;
+    }
+
+    .btn-brand-secondary {
+        @apply bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-semibold;
+    }
+
+    .btn-brand-secondary:hover {
+        @apply bg-green-700 transform -translate-y-0.5;
+    }
+
+    .btn-flex {
+        @apply bg-gray-100/50 border border-gray-300 text-gray-700 rounded-lg transition-colors shadow-lg duration-500 ;
+    }
+
+    .btn-flex:hover {
+        @apply border-gray-400 bg-gray-50 shadow-xl transform;
+    }
+
+    /* Брендовые карточки */
+    .card-brand {
+        @apply bg-white rounded-xl shadow-lg border border-gray-100 p-6 transition-all duration-300;
+    }
+
+    .card-brand:hover {
+        @apply shadow-xl transform -translate-y-1;
+    }
+
+    /* Градиентные фоны */
+    .bg-gradient-brand {
+        @apply bg-gradient-to-r from-blue-500/30 via-blue-300/20 to-orange-500/30
+    }
+    .bg-gradient-brand-text {
+        background: linear-gradient(
+            90deg,
+            #2563eb 20%,
+            #64b15d 50%,
+            #f59e42 80%
+        );
+    }
+
+    .bg-gradient-purple {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .bg-gradient-pink {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    /* Текстовые градиенты */
+    .text-gradient-brand {
+        @apply bg-gradient-brand-text bg-clip-text text-transparent;
+    }
+
+    .text-gradient-purple {
+        @apply bg-gradient-purple bg-clip-text text-transparent;
+    }
+
+    /* Форма панели */
+    .form-panel-bg {
+        @apply bg-gradient-brand;
+    }
+
+    /* Модальные окна */
+    .modal-brand {
+        @apply bg-white rounded-xl shadow-2xl border border-gray-100;
+    }
+
+    .modal-header-brand {
+        @apply bg-gradient-to-r from-blue-50 to-orange-50 text-white rounded-t-xl p-6;
+    }
+
+    /* Кнопки действий */
+    .btn-action {
+        @apply p-3 rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl;
+    }
+
+    .btn-action:hover {
+        @apply transform -translate-y-0.5;
+    }
+
+  .btn-action-telegram {
+    @apply btn-action bg-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-800 border border-gray-300 hover:border-gray-400;
+  }
+
+  .btn-action-chatbot {
+    @apply btn-action bg-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-800 border border-gray-300 hover:border-gray-400;
+  }
+
+  .btn-action-copy {
+    @apply btn-action bg-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-800 border border-gray-300 hover:border-gray-400;
+  }
+
+    /* Анимации */
+    .animate-bounce-slow {
+        animation: bounce 2s infinite;
+    }
+
+    .animate-pulse-slow {
+        animation: pulse 3s infinite;
+    }
+
+    .animate-spin-slow {
+        animation: spin 3s linear infinite;
+    }
+
+    /* Тени */
+    .shadow-brand {
+        box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1),
+            0 10px 10px -5px rgba(37, 99, 235, 0.04);
+    }
+
+    .shadow-glow {
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+    }
+
+    /* Специальные эффекты */
+    .glass-effect {
+        @apply bg-white bg-opacity-20 backdrop-blur-md border border-white border-opacity-30;
+    }
+
+    .hover-lift {
+        @apply transition-all duration-300 hover:transform hover:-translate-y-1 hover:shadow-xl;
+    }
+
+    /* Скрытие скроллбара */
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@layer utilities {
+    /* Дополнительные утилиты */
+    .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .text-shadow-lg {
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Анимации появления */
+    .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .slide-up {
+        animation: slideUp 0.3s ease-out;
+    }
+
+    .scale-in {
+        animation: scaleIn 0.2s ease-out;
+    }
+}
+
+/* Ключевые кадры для анимаций */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

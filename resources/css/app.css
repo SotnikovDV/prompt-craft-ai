@@ -1,0 +1,19 @@
+/* Импорт пользовательских стилей */
+@import './custom.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .text-gradient-hero {
+        @apply inline-block bg-clip-text text-transparent;
+        background-image: linear-gradient(90deg, #2563eb 20%, #64b15d 50%, #f59e42 80%);
+    }
+
+    .text-gradient-anti {
+        @apply inline-block bg-clip-text text-transparent;
+        background-image: linear-gradient(90deg, #f59e42 80%, #64b15d 50%, #2563eb 20%);
+    }
+  }
