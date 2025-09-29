@@ -104,7 +104,7 @@
             font-size: 0.9em !important;
         }
 
-        /* Пользовательские стили теперь определены в resources/css/custom.css */
+         /* Пользовательские стили теперь определены в resources/css/custom.css */
     </style>
     <!-- Герой-секция (верхний блок) -->
     <section class="py-10 bg-white bg-opacity-10">
@@ -265,7 +265,7 @@
 
                         <!-- Компонент формы промптов -->
                         <x-prompts.prompt-form :showLimits="true" formId="prompt-form" />
-                    </div>
+                                </div>
                 </div>
             </div>
         </div>
@@ -274,91 +274,6 @@
     <!-- Компонент результата промпта -->
     <x-prompts.prompt-result resultId="result-section" :showTitle="true" :showParameters="true" />
 
-    <!-- Подвал сайта -->
-    <footer class="bg-gray-900 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-                <!-- Информация о компании -->
-                <div class="md:col-span-1">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div
-                            class="w-8 h-8 bg-gradient-to-br from-blue-500 to-orange-500 rounded-lg flex items-center justify-center">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                        </div>
-                        <span class="text-xl font-bold">Толкователь ИИ</span>
-                    </div>
-                    <p class="text-gray-400 mb-6">
-                        Интеллектуальная платформа для создания профессиональных промптов для языковых моделей.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Ссылки на продукт -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Продукт</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Генератор промптов</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Библиотека шаблонов</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">API для разработчиков</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Chrome расширение</a></li>
-                    </ul>
-                </div>
-
-                <!-- Полезные ресурсы -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Ресурсы</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Документация</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Руководства</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Best Practices</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Сообщество</a></li>
-                    </ul>
-                </div>
-
-                <!-- Ссылки поддержки -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Поддержка</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Центр помощи</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Связаться с нами</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Статус системы</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Обратная связь</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Нижняя панель подвала -->
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">© 2025 Толкователь ИИ. Все права защищены.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Политика конфиденциальности</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm">Условия использования</a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
 
     <!-- Модальное окно с информацией о промптах -->
@@ -635,48 +550,6 @@
         // ============================================================================
 
         /**
-         * Форматирование текста с поддержкой Markdown-подобного синтаксиса
-         */
-        function formatText(text) {
-            if (!text) return '';
-
-            let result = text
-                // Экранируем HTML
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                // Выделяем жирный текст
-                .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold">$1</strong>')
-                // Выделяем курсив
-                .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-                // Выделяем код
-                .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">$1</code>')
-                // Создаем маркированные списки из строк, начинающихся с - или •
-                .replace(/^[\s]*[-•]\s*(.+)$/gm, '<li>$1</li>')
-                // Создаем нумерованные списки
-                .replace(/^[\s]*(\d+)\.\s*(.+)$/gm, '<li>$1. $2</li>')
-                // Оборачиваем группы <li> в <ul> или <ol>
-                .replace(/(<li>\d+\..*?<\/li>)(?=\s*<li>\d+\.|$)/gs,
-                    '<ol class="list-decimal list-inside space-y-2 my-4">$1</ol>')
-                .replace(/(<li>•.*?<\/li>)(?=\s*<li>•|$)/gs, '<ul class="list-disc list-inside space-y-2 my-4">$1</ul>')
-                // Обрабатываем одиночные элементы списка
-                .replace(/(<li>\d+\..*?<\/li>)/gs, '<ol class="list-decimal list-inside space-y-2 my-4">$1</ol>')
-                .replace(/(<li>•.*?<\/li>)/gs, '<ul class="list-disc list-inside space-y-2 my-4">$1</ul>')
-                // Выделяем заголовки (строки, заканчивающиеся на :)
-                .replace(/^(.+):\s*$/gm, '<h4 class="font-semibold text-gray-800 mt-3 mb-2 text-blue-700">$1</h4>')
-                // Выделяем цитаты (строки, начинающиеся с >)
-                .replace(/^>\s*(.+)$/gm,
-                    '<blockquote class="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-2">$1</blockquote>')
-                // Создаем разделители
-                .replace(/^---$/gm, '<hr class="my-4 border-gray-300">')
-                // Выделяем ссылки
-                .replace(/\[([^\]]+)\]\(([^)]+)\)/g,
-                    '<a href="$2" class="text-blue-600 hover:text-blue-800 underline" target="_blank">$1</a>');
-
-            return result;
-        }
-
-        /**
          * Обработка результата генерации промпта
          */
         function handlePromptResult(data) {
@@ -689,6 +562,12 @@
                 window.promptResultManager.showResult(data);
             } else {
                 console.error('PromptResultManager не инициализирован');
+            }
+
+            // Обновляем информацию о лимитах после успешной генерации
+            if (window.promptFormManager) {
+                console.log('Обновляем лимиты после генерации промпта');
+                window.promptFormManager.loadLimitsInfo();
             }
         }
 
@@ -715,6 +594,11 @@
                 // Слушаем событие ошибки
                 promptFormContainer.addEventListener('prompt-error', (e) => {
                     showErrorModal('Ошибка генерации', e.detail.error);
+                });
+
+                // Слушаем событие превышения лимита
+                promptFormContainer.addEventListener('prompt-limit-exceeded', (e) => {
+                    showLimitExceededModal();
                 });
 
                 // Слушаем событие уведомлений
@@ -1003,32 +887,12 @@
         // Обработчики для модального окна и определение типа устройства
         document.addEventListener('DOMContentLoaded', function() {
             // Добавляем обработчики для модального окна
-            setupModalHandlers();
+            // setupModalHandlers(); // УДАЛЕНО: InfoModalManager уже обрабатывает события
 
             // Определяем тип устройства
             detectDeviceType();
         });
 
-        /**
-         * Настройка обработчиков для модального окна
-         */
-        function setupModalHandlers() {
-            const modal = document.getElementById('notification-modal');
-
-            // Закрытие по клику на фон
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // Закрытие по клавише Escape
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                    closeModal();
-                }
-            });
-        }
 
         /**
          * Определение типа устройства
@@ -1055,69 +919,12 @@
             console.log('Device info:', window.deviceInfo);
         }
 
-        // ============================================================================
-        // ФУНКЦИИ ДЛЯ УПРАВЛЕНИЯ МОДАЛЬНЫМ ОКНОМ
-        // ============================================================================
-
-        /**
-         * Показать модальное окно с уведомлением
-         * @param {string} type - тип уведомления: 'success', 'error', 'warning', 'info'
-         * @param {string} title - заголовок
-         * @param {string} message - сообщение
-         * @param {Object} options - дополнительные опции
-         */
-        function showModal(type = 'info', title = 'Уведомление', message = '', options = {}) {
-            if (window.infoModalManager) {
-                window.infoModalManager.show({
-                    title,
-                    message,
-                    type,
-                    showCancel: options.showCancel || false,
-                    confirmText: options.confirmText || 'OK',
-                    cancelText: options.cancelText || 'Отмена',
-                    onConfirm: options.onConfirm || null,
-                    onCancel: options.onCancel || null,
-                    onClose: options.onClose || null
-                });
-            } else {
-                console.error('InfoModalManager не инициализирован');
-            }
-        }
-
-        /**
-         * Закрыть модальное окно
-         */
-        function closeModal() {
-            const modal = document.getElementById('notification-modal');
-            const modalContent = document.getElementById('modal-content');
-
-            // Анимация закрытия
-            modalContent.classList.remove('scale-100', 'opacity-100');
-            modalContent.classList.add('scale-95', 'opacity-0');
-
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                // Очищаем callback функции
-                window.modalCallback = null;
-                window.modalCancelCallback = null;
-            }, 300);
-        }
-
-        /**
-         * Подтвердить действие в модальном окне
-         */
-        function confirmModal() {
-            if (window.modalCallback && typeof window.modalCallback === 'function') {
-                window.modalCallback();
-            }
-            closeModal();
-        }
-
         /**
          * Показать уведомление об ошибке лимита
          */
         function showLimitExceededModal() {
-            showModal('warning', 'Превышен лимит запросов',
+            if (window.infoModalManager) {
+                window.infoModalManager.showWarning('Превышен лимит запросов',
                 'Вы использовали все доступные запросы на сегодня. Зарегистрируйтесь для увеличения лимита или попробуйте завтра.', {
                     confirmText: 'Понятно',
                     onConfirm: () => {
@@ -1131,6 +938,9 @@
                     }
                 }
             );
+            } else {
+                console.error('InfoModalManager не инициализирован');
+            }
         }
 
         /**
@@ -1142,9 +952,7 @@
                     confirmText: 'Отлично!'
                 });
             } else {
-                showModal('success', title, message, {
-                    confirmText: 'Отлично!'
-                });
+                console.error('InfoModalManager не инициализирован');
             }
         }
 
@@ -1157,473 +965,17 @@
                     confirmText: 'Понятно'
                 });
             } else {
-                showModal('error', title, message, {
-                    confirmText: 'Понятно'
-                });
-            }
-        }
-
-        /**
-         * Тестовая функция для проверки модальных окон
-         */
-        function testModals() {
-            // Показываем разные типы модальных окон по очереди
-            showModal('info', 'Информация', 'Это информационное сообщение для тестирования модального окна.', {
-                confirmText: 'Понятно',
-                onConfirm: () => {
-                    setTimeout(() => {
-                        showModal('success', 'Успех!',
-                            'Операция выполнена успешно! Модальное окно работает корректно.', {
-                                confirmText: 'Отлично!',
-                                onConfirm: () => {
-                                    setTimeout(() => {
-                                        showModal('warning', 'Предупреждение',
-                                            'Это предупреждающее сообщение. Будьте осторожны!', {
-                                                confirmText: 'Принято',
-                                                onConfirm: () => {
-                                                    setTimeout(() => {
-                                                        showLimitExceededModal
-                                                            ();
-                                                    }, 500);
-                                                }
-                                            });
-                                    }, 500);
-                                }
-                            });
-                    }, 500);
-                }
-            });
-        }
-
-        /**
-         * Тестовая функция для проверки копирования
-         */
-        function testCopy() {
-            const testText = 'Это тестовый текст для проверки функции копирования на мобильных устройствах.';
-
-            // Создаем временный элемент для тестирования
-            const testElement = document.createElement('div');
-            testElement.innerHTML = `<p>${testText}</p>`;
-            testElement.style.display = 'none';
-            document.body.appendChild(testElement);
-
-            // Симулируем клик по кнопке копирования
-            const mockEvent = {
-                target: {
-                    closest: () => ({
-                        innerHTML: '<svg>copy</svg>',
-                        classList: {
-                            add: () => {},
-                            remove: () => {}
-                        },
-                        title: 'Копировать'
-                    })
-                }
-            };
-
-            // Временно заменяем элемент с промптом
-            const originalElement = document.getElementById('generated-prompt');
-            const tempElement = document.createElement('div');
-            tempElement.id = 'generated-prompt';
-            tempElement.innerHTML = `<p>${testText}</p>`;
-            originalElement.parentNode.replaceChild(tempElement, originalElement);
-
-            // Тестируем копирование
-            copyToClipboard(mockEvent);
-
-            // Восстанавливаем оригинальный элемент
-            setTimeout(() => {
-                tempElement.parentNode.replaceChild(originalElement, tempElement);
-                document.body.removeChild(testElement);
-            }, 1000);
-        }
-
-        // Функция для загрузки информации о лимитах
-        async function loadLimitsInfo() {
-            try {
-                const response = await fetch('{{ route('api.limits') }}', {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                updateLimitsDisplay(data);
-            } catch (error) {
-                console.error('Ошибка при загрузке лимитов:', error);
-                // Скрываем блок лимитов при ошибке
-                document.getElementById('limits-info').classList.add('hidden');
-            }
-        }
-
-        // Функция для обновления отображения лимитов
-        function updateLimitsDisplay(data) {
-            const limitsInfo = document.getElementById('limits-info');
-            const limitsText = document.getElementById('limits-text');
-
-            if (!data.is_authenticated) {
-                // Показываем информацию для незарегистрированных пользователей
-                if (data.remaining_requests !== null) {
-                    if (data.remaining_requests > 0) {
-                        limitsText.textContent =
-                            `У вас осталось ${data.remaining_requests} из ${data.daily_limit_guest} запросов сегодня`;
-                        limitsInfo.classList.remove('hidden');
-                    } else {
-                        limitsText.textContent = `Вы использовали все ${data.daily_limit_guest} запросов сегодня`;
-                        limitsInfo.classList.remove('hidden');
-                        limitsInfo.className = limitsInfo.className.replace('bg-blue-50 border-blue-200',
-                            'bg-red-50 border-red-200');
-                        limitsText.className = limitsText.className.replace('text-blue-800', 'text-red-800');
-                    }
-                }
-            } else {
-                // Скрываем для зарегистрированных пользователей (если у них нет лимита)
-                if (data.remaining_requests === null) {
-                    limitsInfo.classList.add('hidden');
-                } else {
-                    // Показываем для зарегистрированных с лимитом
-                    if (data.remaining_requests > 0) {
-                        limitsText.textContent =
-                            `У вас осталось ${data.remaining_requests} из ${data.daily_limit_user} запросов сегодня`;
-                        limitsInfo.classList.remove('hidden');
-                    } else {
-                        limitsText.textContent = `⚠️ Вы использовали все ${data.daily_limit_user} запросов сегодня`;
-                        limitsInfo.classList.remove('hidden');
-                        limitsInfo.className = limitsInfo.className.replace('bg-blue-50 border-blue-200',
-                            'bg-red-50 border-red-200');
-                        limitsText.className = limitsText.className.replace('text-blue-800', 'text-red-800');
-                    }
-                }
+                console.error('InfoModalManager не инициализирован');
             }
         }
 
         // Функция toggleAdvancedOptions теперь обрабатывается в PromptFormManager
 
-        // Функция для копирования промпта в буфер обмена
-        window.copyToClipboard = function(event) {
-            const promptElement = document.getElementById('generated-prompt').querySelector('.formatted-content');
-            const promptText = promptElement.textContent || promptElement.innerText;
-            const button = event.target.closest('button');
-            const originalHTML = button.innerHTML;
+        // Функция copyToClipboard теперь обрабатывается в PromptResultManager
+        // через data-copy-button в компоненте prompt-result.blade.php
 
-            // Функция для обновления кнопки при успешном копировании
-            function updateButtonOnSuccess() {
-                button.innerHTML = `
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                `;
-                button.classList.add('bg-green-500', 'hover:bg-green-600');
-                button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
-                button.title = 'Скопировано!';
-
-                setTimeout(() => {
-                    button.innerHTML = originalHTML;
-                    button.classList.remove('bg-green-500', 'hover:bg-green-600');
-                    button.classList.add('bg-blue-500', 'hover:bg-blue-600');
-                    button.title = 'Копировать промпт';
-                }, 2000);
-            }
-
-            // Пытаемся скопировать через Clipboard API
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(promptText).then(() => {
-                    updateButtonOnSuccess();
-                }).catch(() => {
-                    // Fallback к старому методу
-                    copyWithFallback(promptText, updateButtonOnSuccess);
-                });
-            } else {
-                // Используем fallback метод
-                copyWithFallback(promptText, updateButtonOnSuccess);
-            }
-        }
-
-        // Fallback функция для копирования текста
-        function copyWithFallback(text, onSuccess) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.top = '0';
-            textArea.style.left = '0';
-            textArea.style.width = '2em';
-            textArea.style.height = '2em';
-            textArea.style.padding = '0';
-            textArea.style.border = 'none';
-            textArea.style.outline = 'none';
-            textArea.style.boxShadow = 'none';
-            textArea.style.background = 'transparent';
-            textArea.style.opacity = '0';
-            textArea.style.zIndex = '-1';
-
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    onSuccess();
-                }
-            } catch (err) {
-                console.error('Ошибка копирования:', err);
-            }
-
-            document.body.removeChild(textArea);
-        };
-
-        // Функция для передачи промпта в чат-бот
-        window.sendToChatBot = function(event) {
-            const promptElement = document.getElementById('generated-prompt').querySelector('.formatted-content');
-            const promptText = promptElement.textContent || promptElement.innerText;
-            const button = event.target.closest('button');
-            const originalHTML = button.innerHTML;
-
-            // Кодируем промпт для передачи в URL
-            const encodedPrompt = encodeURIComponent(promptText);
-
-            // Список популярных чат-ботов с их URL-схемами
-            const chatBots = {
-                'chatgpt': `https://chat.openai.com/?prompt=${encodedPrompt}`,
-                'claude': `https://claude.ai/?prompt=${encodedPrompt}`,
-                'gemini': `https://gemini.google.com/?prompt=${encodedPrompt}`,
-                'perplexity': `https://www.perplexity.ai/?q=${encodedPrompt}`,
-                'deepseek': `https://chat.deepseek.com/?prompt=${encodedPrompt}`,
-                'qwen': `https://chat.qwen.ai/?prompt=${encodedPrompt}`,
-                'alice': `https://alice.yandex.ru/?prompt=${encodedPrompt}`
-            };
-
-            // Создаем модальное окно для выбора чат-бота
-            const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-            modal.innerHTML = `
-                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Выберите чат-бот</h3>
-                    <div class="space-y-3">
-                        <button onclick="openChatBot('chatgpt', '${encodedPrompt}')"
-                            class="w-full p-3 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3">
-                                    <span class="text-white text-sm font-bold">C</span>
-                                </div>
-                                <span class="font-medium">ChatGPT</span>
-                            </div>
-                        </button>
-                        <button onclick="openChatBot('claude', '${encodedPrompt}')"
-                            class="w-full p-3 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3">
-                                    <span class="text-white text-sm font-bold">C</span>
-                                </div>
-                                <span class="font-medium">Claude</span>
-                            </div>
-                        </button>
-                        <button onclick="openChatBot('gemini', '${encodedPrompt}')"
-                            class="w-full p-3 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3">
-                                    <span class="text-white text-sm font-bold">G</span>
-                                </div>
-                                <span class="font-medium">Gemini</span>
-                            </div>
-                        </button>
-                        <button onclick="openChatBot('perplexity', '${encodedPrompt}')"
-                            class="w-full p-3 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3">
-                                    <span class="text-white text-sm font-bold">P</span>
-                                </div>
-                                <span class="font-medium">Perplexity</span>
-                            </div>
-                        </button>
-                        <button onclick="openChatBot('deepseek', '${encodedPrompt}')"
-                            class="w-full p-3 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center mr-3">
-                                    <span class="text-white text-sm font-bold">D</span>
-                                </div>
-                                <span class="font-medium">DeepSeek</span>
-                            </div>
-                        </button>
-                        <button onclick="openChatBot('qwen', '${encodedPrompt}')"
-                            class="w-full p-3 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center mr-3">
-                                    <span class="text-white text-sm font-bold">Q</span>
-                                </div>
-                                <span class="font-medium">Qwen</span>
-                            </div>
-                        </button>
-                        <button onclick="openChatBot('alice', '${encodedPrompt}')"
-                            class="w-full p-3 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mr-3">
-                                    <span class="text-white text-sm font-bold">Я</span>
-                                </div>
-                                <span class="font-medium">Яндекс Алиса</span>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="mt-4 flex justify-end">
-                        <button onclick="closeChatBotModal()"
-                            class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors">
-                            Отмена
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            document.body.appendChild(modal);
-
-            // Функция для открытия чат-бота
-            window.openChatBot = function(bot, encodedPrompt) {
-                if (bot === 'gemini' || bot === 'deepseek' || bot === 'qwen' || bot === 'alice') {
-                    // Для этих ботов используем алгоритм с копированием в буфер обмена
-                    handleCopyPrompt(bot, encodedPrompt);
-                } else {
-                    const url = chatBots[bot];
-                    if (url) {
-                        window.open(url, '_blank');
-                    }
-                }
-                closeChatBotModal();
-            };
-
-            // Функция для закрытия модального окна
-            window.closeChatBotModal = function() {
-                document.body.removeChild(modal);
-                delete window.openChatBot;
-                delete window.closeChatBotModal;
-            };
-
-            // Функция для обработки ботов с копированием в буфер обмена
-            window.handleCopyPrompt = function(bot, encodedPrompt) {
-                const promptText = decodeURIComponent(encodedPrompt);
-
-                // Копируем промпт в буфер обмена
-                navigator.clipboard.writeText(promptText).then(() => {
-                    // Показываем модальное окно с инструкцией
-                    showCopyPromptModal(bot);
-                }).catch(() => {
-                    // Fallback для старых браузеров
-                    const textArea = document.createElement('textarea');
-                    textArea.value = promptText;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-
-                    // Показываем модальное окно с инструкцией
-                    showCopyPromptModal(bot);
-                });
-            };
-
-            // Функция для показа модального окна с инструкцией по копированию промпта
-            window.showCopyPromptModal = function(bot) {
-                // Определяем данные для каждого бота
-                const botData = {
-                    'gemini': {
-                        name: 'Gemini',
-                        url: 'https://gemini.google.com/',
-                        iconBgClass: 'bg-blue-100',
-                        iconTextClass: 'text-blue-600',
-                        buttonClass: 'bg-blue-500 hover:bg-blue-600',
-                        icon: 'G'
-                    },
-                    'deepseek': {
-                        name: 'DeepSeek',
-                        url: 'https://chat.deepseek.com/',
-                        iconBgClass: 'bg-indigo-100',
-                        iconTextClass: 'text-indigo-600',
-                        buttonClass: 'bg-indigo-500 hover:bg-indigo-600',
-                        icon: 'D'
-                    },
-                    'qwen': {
-                        name: 'Qwen',
-                        url: 'https://chat.qwen.ai/',
-                        iconBgClass: 'bg-red-100',
-                        iconTextClass: 'text-red-600',
-                        buttonClass: 'bg-red-500 hover:bg-red-600',
-                        icon: 'Q'
-                    },
-                    'alice': {
-                        name: 'Яндекс Алиса',
-                        url: 'https://alice.yandex.ru/',
-                        iconBgClass: 'bg-yellow-100',
-                        iconTextClass: 'text-yellow-600',
-                        buttonClass: 'bg-yellow-500 hover:bg-yellow-600',
-                        icon: 'Я'
-                    }
-                };
-
-                const currentBot = botData[bot];
-                if (!currentBot) return;
-
-                const modal = document.createElement('div');
-                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-                modal.innerHTML = `
-                    <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-                        <div class="text-center">
-                            <div class="w-16 h-16 ${currentBot.iconBgClass} rounded-full flex items-center justify-center mx-auto mb-4">
-                                <span class="${currentBot.iconTextClass} text-2xl font-bold">${currentBot.icon}</span>
-                            </div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Промпт скопирован!</h3>
-                            <p class="text-gray-600 mb-6">
-                                Ваш промпт скопирован в буфер обмена. После открытия ${currentBot.name} вставьте его в поле для ввода (Ctrl+V).
-                            </p>
-                            <div class="flex justify-center space-x-3">
-                                <button onclick="openBotAndClose('${bot}')"
-                                    class="px-6 py-2 ${currentBot.buttonClass} text-white rounded-lg transition-colors">
-                                    Открыть ${currentBot.name}
-                                </button>
-                                <button onclick="closeCopyPromptModal()"
-                                    class="px-6 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors">
-                                    Отмена
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                document.body.appendChild(modal);
-
-                // Функция для открытия бота и закрытия модального окна
-                window.openBotAndClose = function(botName) {
-                    const bot = botData[botName];
-                    if (bot) {
-                        window.open(bot.url, '_blank');
-                    }
-                    closeCopyPromptModal();
-                };
-
-                // Функция для закрытия модального окна
-                window.closeCopyPromptModal = function() {
-                    document.body.removeChild(modal);
-                    delete window.openBotAndClose;
-                    delete window.closeCopyPromptModal;
-                };
-
-                // Закрытие по клику на фон
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        window.closeCopyPromptModal();
-                    }
-                });
-            };
-
-            // Закрытие по клику на фон
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    window.closeChatBotModal();
-                }
-            });
-        };
+        // Функция sendToChatBot теперь обрабатывается в ChatBotModalManager
+        // через data-chatbot-button в компоненте prompt-result.blade.php
 
         // Функция для отправки промпта в Telegram (использует новый компонент)
         window.sendToTelegram = function(event) {
@@ -1644,264 +996,6 @@
                 }
             }));
         };
-
-        // Функция для генерации промпта
-        /*
-        async function generatePrompt() {
-            const form = document.getElementById('prompt-form');
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
-
-            console.log('Запуск генерации промпта');
-
-            // Скрываем секцию результата во время генерации
-            // document.getElementById('result-section').classList.add('hidden');
-            if (window.promptResultManager) {
-                console.log('Скрываем панель результата');
-                window.promptResultManager.hide();
-            }
-
-            // Показываем индикатор загрузки
-            submitButton.innerHTML =
-                '<svg class="w-5 h-5 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>Создаем промпт...';
-            submitButton.disabled = true;
-
-            // Собираем данные формы
-            const formData = new FormData(form);
-            console.log('Данные формы:', Object.fromEntries(formData));
-
-            // Проверяем CSRF токен
-            const csrfToken = document.querySelector('meta[name="csrf-token"]');
-            console.log('CSRF токен найден:', csrfToken ? 'ДА' : 'НЕТ');
-            console.log('CSRF токен значение:', csrfToken ? csrfToken.getAttribute('content') : 'НЕТ');
-
-            try {
-                const url = '{{ route('generate-prompt') }}';
-                console.log('Отправляем запрос на:', url);
-
-                const response = await fetch(url, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN': csrfToken ? csrfToken.getAttribute('content') : ''
-                    }
-                });
-
-                console.log('Ответ получен:', response.status);
-
-                if (!response.ok) {
-                    // Если это ошибка 429 (Too Many Requests), получаем детали из ответа
-                    if (response.status === 429) {
-                        try {
-                            const errorData = await response.json();
-                            throw new Error(`429: ${errorData.error || 'Превышен лимит запросов'}`);
-                        } catch (jsonError) {
-                            throw new Error('429: Превышен дневной лимит запросов');
-                        }
-                    }
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log('Данные ответа:', data);
-
-                // Показываем результат
-                showResult(data);
-
-                // Обновляем информацию о лимитах
-                loadLimitsInfo();
-
-                // Прокручиваем к результату
-                document.getElementById('result-section').scrollIntoView({
-                    behavior: 'smooth'
-                });
-
-            } catch (error) {
-                console.error('Ошибка при генерации промпта:', error);
-
-                // Проверяем, является ли это ошибкой лимита
-                if (error.message.includes('429')) {
-                    showLimitExceededModal();
-                } else {
-                    showErrorModal('Ошибка генерации', 'Произошла ошибка при генерации промпта. Попробуйте еще раз.');
-                }
-            } finally {
-                // Восстанавливаем кнопку
-                submitButton.innerHTML = originalButtonText;
-                submitButton.disabled = false;
-            }
-        }
-        */
-
-        // Функция для пересоздания промпта с уточнениями
-        async function regenerateWithClarification() {
-            const clarificationInput = document.getElementById('clarification-input');
-            const originalRequest = document.getElementById('prompt-input');
-            const clarificationText = clarificationInput.value.trim();
-
-            if (clarificationText) {
-                // Добавляем уточнения к исходному запросу
-                const combinedRequest = originalRequest.value + '\n\nДополнительные уточнения: ' + clarificationText;
-                originalRequest.value = combinedRequest;
-
-                // Очищаем поле уточнений
-                clarificationInput.value = '';
-            }
-
-            // Запускаем процесс генерации с parent_id
-            await generatePromptWithParent();
-        }
-
-        // Функция для генерации промпта с parent_id (для уточнений)
-        async function generatePromptWithParent() {
-            const form = document.getElementById('prompt-form');
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
-
-            console.log('Запуск генерации промпта с уточнениями');
-
-            // Скрываем секцию результата во время генерации
-            document.getElementById('result-section').classList.add('hidden');
-
-            // Показываем индикатор загрузки
-            submitButton.innerHTML =
-                '<svg class="w-5 h-5 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>Создаем промпт...';
-            submitButton.disabled = true;
-
-            // Собираем данные формы
-            const formData = new FormData(form);
-
-            // Добавляем parent_id из последнего запроса
-            const lastRequestId = window.lastRequestId;
-            if (lastRequestId) {
-                formData.append('parent_id', lastRequestId);
-            }
-
-            console.log('Данные формы:', Object.fromEntries(formData));
-
-            // Проверяем CSRF токен
-            const csrfToken = document.querySelector('meta[name="csrf-token"]');
-            console.log('CSRF токен найден:', csrfToken ? 'ДА' : 'НЕТ');
-            console.log('CSRF токен значение:', csrfToken ? csrfToken.getAttribute('content') : 'НЕТ');
-
-            try {
-                const url = '{{ route('generate-prompt') }}';
-                console.log('Отправляем запрос на:', url);
-
-                const response = await fetch(url, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN': csrfToken ? csrfToken.getAttribute('content') : ''
-                    }
-                });
-
-                console.log('Ответ получен:', response.status);
-
-                if (!response.ok) {
-                    // Если это ошибка 429 (Too Many Requests), получаем детали из ответа
-                    if (response.status === 429) {
-                        try {
-                            const errorData = await response.json();
-                            throw new Error(`429: ${errorData.error || 'Превышен лимит запросов'}`);
-                        } catch (jsonError) {
-                            throw new Error('429: Превышен дневной лимит запросов');
-                        }
-                    }
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log('Данные ответа:', data);
-
-                // Показываем результат
-                showResult(data);
-
-                // Обновляем информацию о лимитах
-                loadLimitsInfo();
-
-                // Прокручиваем к результату
-                document.getElementById('result-section').scrollIntoView({
-                    behavior: 'smooth'
-                });
-
-            } catch (error) {
-                console.error('Ошибка при генерации промпта:', error);
-
-                // Проверяем, является ли это ошибкой лимита
-                if (error.message.includes('429')) {
-                    showLimitExceededModal();
-                } else {
-                    showErrorModal('Ошибка генерации', 'Произошла ошибка при генерации промпта. Попробуйте еще раз.');
-                }
-            } finally {
-                // Восстанавливаем кнопку
-                submitButton.innerHTML = originalButtonText;
-                submitButton.disabled = false;
-            }
-        }
-
-        // Функция для пересоздания промпта
-        async function regeneratePrompt() {
-            // Скрываем секцию результата во время генерации
-            document.getElementById('result-section').classList.add('hidden');
-
-            // Показываем индикатор загрузки
-            const button = event.target.closest('button');
-            const originalText = button.innerHTML;
-            button.innerHTML =
-                '<svg class="w-4 h-4 mr-2 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>Создаем...';
-            button.disabled = true;
-
-            try {
-                // Собираем данные из формы
-                const form = document.getElementById('prompt-form');
-                const formData = new FormData(form);
-
-                const response = await fetch('{{ route('generate-prompt') }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                            'content')
-                    }
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    // Обновляем результат
-                    showResult(data);
-                } else {
-                    showErrorModal('Ошибка пересоздания', data.error || 'Неизвестная ошибка');
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-
-                // Проверяем, является ли это ошибкой лимита
-                if (error.message.includes('429')) {
-                    showLimitExceededModal();
-                } else {
-                    showErrorModal('Ошибка пересоздания', 'Произошла ошибка при пересоздании промпта.');
-                }
-            } finally {
-                // Восстанавливаем кнопку
-                button.innerHTML = originalText;
-                button.disabled = false;
-            }
-        }
-
-        // Функция для отображения результата (будет вызываться после генерации)
-        // formatText теперь находится в PromptResultManager модуле
-
-
-
-        // Обработка отправки формы
-        // Обработчик отправки формы теперь в PromptFormManager
 
         // Добавляем обработчики для модального окна с информацией о промптах
         setupPromptInfoModalHandlers();

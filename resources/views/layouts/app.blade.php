@@ -29,31 +29,31 @@
                     <div class="flex justify-between items-center h-14">
                         <!-- Логотип (кликабельный на мобильных) -->
                         <div class="flex items-center">
-                            <div class="flex items-center space-x-2 cursor-pointer md:cursor-default" @click="mobileMenuOpen = !mobileMenuOpen">
-                                {{-- <div
-                                    class="w-8 h-8 bg-gradient-to-br from-blue-500 to-orange-500 rounded-lg flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path
-                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                </div> --}}
+                            <div class="flex items-center space-x-2 cursor-pointer md:cursor-default"
+                                @click="mobileMenuOpen = !mobileMenuOpen">
+
                                 <div class="relative rounded-xl">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                                        class="p-1 lucide lucide-sparkles h-8 w-8 rounded-xl bg-gradient-to-br from-blue-500 to-orange-500 text-blue-700" >
-                                        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="p-1 lucide lucide-sparkles h-8 w-8 rounded-xl bg-gradient-to-br from-blue-500 to-orange-500 text-blue-700">
+                                        <path
+                                            d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z">
+                                        </path>
+                                        <path d="M20 3v4"></path>
+                                        <path d="M22 5h-4"></path>
+                                        <path d="M4 17v2"></path>
+                                        <path d="M5 18H3"></path>
                                     </svg>
-                                    {{-- <div class="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-pulse">
-                                        <div class="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-pulse">
-                                        </div>
-                                    </div> --}}
+
                                 </div>
-                           <div class="flex items-center space-x-1">
-                               <span class="text-xl font-bold text-gradient-hero hidden md:block">Толкователь ИИ</span>
-                               @auth
-                                   <span class="text-xl font-bold text-gradient-hero md:hidden">Толкователь ИИ</span>
-                               @endauth
-                           </div>
+                                <div class="flex items-center space-x-1">
+                                    <span class="text-xl font-bold text-gradient-hero hidden md:block">Толкователь
+                                        ИИ</span>
+                                    @auth
+                                        <span class="text-xl font-bold text-gradient-hero md:hidden">Толкователь ИИ</span>
+                                    @endauth
+                                </div>
                             </div>
                         </div>
 
@@ -82,25 +82,20 @@
                                                 class="text-white text-sm font-medium">{{ substr(Auth::user()->name, 0, 1) }}</span>
                                         </div>
 
-                                        {{-- <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg> --}}
                                     </button>
 
                                     <!-- Выпадающее меню -->
                                     <div x-show="open" @click.away="open = false" x-transition
                                         class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
-                                        <a href="{{ url('/dashboard') }}"
+                                        <a href="{{ url('/chat') }}"
                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
-                                            Dashboard
+                                            Чат
                                         </a>
                                         <a href="{{ route('profile.edit') }}"
                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                                             Профиль
                                         </a>
-                                        @if(in_array(Auth::user()->email, config('app.admin_emails', [])))
+                                        @if (in_array(Auth::user()->email, config('app.admin_emails', [])))
                                             <hr class="my-1">
                                             <a href="{{ route('admin.settings') }}"
                                                 class="block px-4 py-2 text-sm text-blue-600 hover:bg-blue-50">
@@ -135,23 +130,32 @@
             </header>
 
             <!-- Мобильное меню -->
-            <div x-show="mobileMenuOpen" x-transition class="pt-16 md:hidden bg-white border-b border-gray-100 shadow-lg">
+            <div x-show="mobileMenuOpen" x-transition
+                class="pt-16 md:hidden bg-white border-b border-gray-100 shadow-lg">
                 <div class="px-4 py-2 space-y-1">
-                    <a href="{{ url('/') }}" class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Главная</a>
-                    <a href="#" class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Библиотека</a>
-                    <a href="#" class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">API</a>
-                    <a href="#" class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Помощь</a>
+                    <a href="{{ url('/') }}"
+                        class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Главная</a>
+                    <a href="#"
+                        class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Библиотека</a>
+                    <a href="#"
+                        class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">API</a>
+                    <a href="#"
+                        class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Помощь</a>
                 </div>
             </div>
 
             <!-- Основной контент с отступом для закрепленного заголовка -->
             <main class="pt-16 relative">
-                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('/images/bg_ai.jpg'); opacity: 0.3; z-index: -1;"></div>
-        <div class="relative z-10">
-            @yield('content')
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+                    style="background-image: url('/images/bg_ai.jpg'); opacity: 0.3; z-index: -1;"></div>
+                <div class="relative z-10">
+                    @yield('content')
                 </div>
             </main>
         </div>
+
+        <!-- Футер сайта -->
+        <x-footer />
     </div>
 </body>
 

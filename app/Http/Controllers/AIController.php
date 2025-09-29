@@ -8,6 +8,7 @@ use App\Models\PromptRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AIController extends Controller
 {
@@ -46,6 +47,7 @@ class AIController extends Controller
             'style' => 'nullable|string',
             'format' => 'nullable|string',
             'parent_id' => 'nullable|integer|exists:prompt_requests,id', // для уточнений
+            'session_id' => 'nullable|string', // для чата - может быть строкой (UUID)
         ]);
 
         // Получаем данные из формы
@@ -55,6 +57,7 @@ class AIController extends Controller
         $style = $request->input('style', 'Выберите стиль');
         $format = $request->input('format', 'Выберите формат');
         $parentId = $request->input('parent_id');
+        $chatSessionId = $request->input('session_id'); // ID сессии чата
 
         // Нормализуем значения по умолчанию
         if ($domain === 'Выберите область') $domain = null;
@@ -64,7 +67,14 @@ class AIController extends Controller
 
         // Определяем пользователя и сессию
         $userId = Auth::id();
-        $sessionId = $userId ? null : session()->getId();
+
+        // Если передан session_id из чата, используем его, иначе создаем новую сессию
+        if ($chatSessionId) {
+            $sessionId = $chatSessionId;
+        } else {
+            // Для новых чатов генерируем уникальный session_id
+            $sessionId = Str::random(40);
+        }
 
         Log::info('Checking limits', [
             'user_id' => $userId,
@@ -142,6 +152,27 @@ class AIController extends Controller
             }
         }
 
+        // Определяем, является ли это продолжением чата
+        $isChatContinuation = !empty($chatSessionId);
+        if ($isChatContinuation) {
+            // Для продолжения чата получаем последний запрос пользователя из этой сессии
+            $lastRequest = PromptRequest::where('session_id', $chatSessionId)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($lastRequest) {
+                // Объединяем последний запрос пользователя с новым сообщением
+                $originalRequest = $lastRequest->original_request;
+                $userPrompt = $lastRequest->original_request . ' ' . $userPrompt;
+                Log::info('Chat continuation mode', [
+                    'session_id' => $chatSessionId,
+                    'last_request' => $lastRequest->original_request,
+                    'new_message' => $request->input('prompt'),
+                    'combined_prompt' => $userPrompt
+                ]);
+            }
+        }
+
         // Формируем контекстный промпт с дополнительными параметрами
         $contextualPrompt = $this->buildContextualPrompt($userPrompt, $domain, $targetModel, $style, $format);
 
@@ -205,8 +236,10 @@ class AIController extends Controller
                     'format' => $format,
                 ],
                 'request_id' => $promptRequest->id,
+                'session_id' => $promptRequest->session_id, // Возвращаем session_id
                 'execution_time' => $executionTime,
-                'is_clarification' => $isClarification
+                'is_clarification' => $isClarification,
+                'is_chat_continuation' => $isChatContinuation
             ]);
         } catch (\Exception $e) {
             Log::error('Error generating prompt', [

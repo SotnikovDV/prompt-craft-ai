@@ -21,8 +21,8 @@
             </div>
 
             <!-- Список способов отправки -->
-            <div class="px-6 pb-6">
-                <div class="space-y-3">
+            <div class="px-6 pb-3">
+                <div class="space-y-2">
                     <!-- Telegram Web -->
                     <button data-telegram-option="web"
                         class="w-full p-3 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
@@ -73,7 +73,7 @@
                 </div>
 
                 <!-- Кнопка отмены -->
-                <div class="my-3 flex justify-end">
+                <div class="my-2 flex justify-end border-t border-gray-200">
                     <button data-telegram-modal-cancel
                         class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors">
                         Отмена

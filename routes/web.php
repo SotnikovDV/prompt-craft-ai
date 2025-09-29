@@ -47,6 +47,16 @@ Route::post('/generate-prompt', [AIController::class, 'generatePrompt'])->name('
  */
 Route::get('/api/limits', [AIController::class, 'getLimits'])->name('api.limits');
 
+/**
+ * API маршруты для работы с сессиями
+ */
+Route::middleware(['auth'])->prefix('api/sessions')->group(function () {
+    Route::get('/', [App\Http\Controllers\SessionController::class, 'index'])->name('sessions.index');
+    Route::get('/{sessionId}', [App\Http\Controllers\SessionController::class, 'show'])->name('sessions.show');
+    Route::post('/', [App\Http\Controllers\SessionController::class, 'store'])->name('sessions.store');
+    Route::delete('/{sessionId}', [App\Http\Controllers\SessionController::class, 'destroy'])->name('sessions.destroy');
+});
+
 // ============================================================================
 // АУТЕНТИФИЦИРОВАННЫЕ МАРШРУТЫ
 // ============================================================================
@@ -55,9 +65,13 @@ Route::get('/api/limits', [AIController::class, 'getLimits'])->name('api.limits'
  * Панель управления пользователя
  * Доступна только аутентифицированным и верифицированным пользователям
  */
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/chat', function () {
+    return view('chat');
+})->middleware(['auth'])->name('chat');
+
+Route::get('/chat/{id}', function ($id) {
+    return view('chat', ['chatId' => $id]);
+})->middleware(['auth'])->name('chat.show');
 
 /**
  * Группа маршрутов для управления профилем пользователя
@@ -137,18 +151,6 @@ Route::get('auth/yandex/callback', [YandexController::class, 'handleYandexCallba
 
 // ============================================================================
 // СТАНДАРТНЫЕ МАРШРУТЫ АУТЕНТИФИКАЦИИ
-// ============================================================================
-
-/**
- * API маршруты для работы с сессиями
- */
-Route::middleware(['auth'])->prefix('api/sessions')->group(function () {
-    Route::get('/', [App\Http\Controllers\SessionController::class, 'index'])->name('sessions.index');
-    Route::get('/{sessionId}', [App\Http\Controllers\SessionController::class, 'show'])->name('sessions.show');
-    Route::post('/', [App\Http\Controllers\SessionController::class, 'store'])->name('sessions.store');
-    Route::delete('/{sessionId}', [App\Http\Controllers\SessionController::class, 'destroy'])->name('sessions.destroy');
-});
-
 // ============================================================================
 
 /**

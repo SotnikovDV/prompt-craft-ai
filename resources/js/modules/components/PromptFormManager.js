@@ -116,7 +116,7 @@ export class PromptFormManager {
 
             if (!response.ok) {
                 if (response.status === 429) {
-                    throw new Error('429: Превышен дневной лимит запросов');
+                    throw new Error('Превышен дневной лимит запросов.');
                 }
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -134,9 +134,16 @@ export class PromptFormManager {
         } catch (error) {
             console.error('Ошибка при генерации промпта:', error);
 
-            this.container.dispatchEvent(new CustomEvent('prompt-error', {
-                detail: { error: error.message }
-            }));
+            // Проверяем, является ли это ошибкой лимита
+            if (error.message.includes('429') || error.message.includes('лимит')) {
+                this.container.dispatchEvent(new CustomEvent('prompt-limit-exceeded', {
+                    detail: { error: error.message }
+                }));
+            } else {
+                this.container.dispatchEvent(new CustomEvent('prompt-error', {
+                    detail: { error: error.message }
+                }));
+            }
         } finally {
             this.setLoadingState(false);
         }
@@ -236,10 +243,14 @@ export class PromptFormManager {
     }
 
     async loadLimitsInfo() {
+        console.log('PromptFormManager: loadLimitsInfo() вызван');
         const limitsInfo = document.getElementById('limits-info');
         const limitsText = document.getElementById('limits-text');
 
-        if (!limitsInfo || !limitsText) return;
+        if (!limitsInfo || !limitsText) {
+            console.log('PromptFormManager: Элементы limits-info или limits-text не найдены');
+            return;
+        }
 
         try {
             const response = await fetch('/api/limits', {
@@ -255,6 +266,7 @@ export class PromptFormManager {
             }
 
             const data = await response.json();
+            console.log('PromptFormManager: Получены данные лимитов:', data);
             this.updateLimitsDisplay(data, limitsInfo, limitsText);
         } catch (error) {
             console.error('Ошибка при загрузке лимитов:', error);
@@ -263,6 +275,13 @@ export class PromptFormManager {
     }
 
     updateLimitsDisplay(data, limitsInfo, limitsText) {
+        console.log('PromptFormManager: Обновление отображения лимитов:', data);
+
+        // Сбрасываем классы к исходному состоянию
+        limitsInfo.className = limitsInfo.className.replace(/bg-(red|blue)-50/, 'bg-blue-50');
+        limitsInfo.className = limitsInfo.className.replace(/border-(red|blue)-200/, 'border-blue-200');
+        limitsText.className = limitsText.className.replace(/text-(red|blue)-800/, 'text-blue-800');
+
         if (!data.is_authenticated) {
             if (data.remaining_requests !== null) {
                 if (data.remaining_requests > 0) {

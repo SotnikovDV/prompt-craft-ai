@@ -237,7 +237,7 @@
 
             <!-- Кнопки действий -->
             <div class="flex justify-end space-x-4">
-                <a href="{{ route('dashboard') }}"
+                <a href="{{ route('chat') }}"
                    class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                     Отмена
                 </a>
