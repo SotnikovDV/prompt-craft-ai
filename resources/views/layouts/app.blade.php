@@ -59,10 +59,10 @@
 
                         <!-- Навигация -->
                         <nav class="hidden md:flex items-center space-x-8">
-                            <a href="{{ url('/') }}"
-                                class="text-gray-700 hover:text-gray-900 font-medium">Главная</a>
+                            <a href="{{ url('/') }}" class="text-gray-700 hover:text-gray-900 font-medium">Главная</a>
+                            <a href="{{route('chat')}}" class="text-gray-700 hover:text-gray-900 font-medium">Чат</a>
                             <a href="#" class="text-gray-700 hover:text-gray-900 font-medium">Библиотека</a>
-                            <a href="#" class="text-gray-700 hover:text-gray-900 font-medium">API</a>
+
                             <a href="#" class="text-gray-700 hover:text-gray-900 font-medium">Помощь</a>
                         </nav>
 
@@ -135,10 +135,10 @@
                 <div class="px-4 py-2 space-y-1">
                     <a href="{{ url('/') }}"
                         class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Главная</a>
+                    <a href="{{route('chat')}}"
+                        class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Чат</a>
                     <a href="#"
                         class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Библиотека</a>
-                    <a href="#"
-                        class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">API</a>
                     <a href="#"
                         class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md font-medium">Помощь</a>
                 </div>

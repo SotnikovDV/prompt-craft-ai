@@ -93,8 +93,11 @@ export class ChatDisplayManager {
 
             // Ответ ИИ с закладками
             this.renderAIResponse({
+                generated_prompt: request.generated_prompt,
                 generatedPrompt: request.generated_prompt,
                 reasoning: request.reasoning,
+                request_id: request.id,
+                allow_edit: true, // Разрешаем редактирование для всех промптов в истории
             });
 
             // Уточняющие вопросы
@@ -184,7 +187,7 @@ export class ChatDisplayManager {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                 </div>
-                <div class="flex-1">
+                <div class="flex-1 relative">
                 <div class="bg-white border border-gray-200 rounded-lg p-4 relative">
                     <!-- Закладки -->
                     <div class="flex border-b border-gray-200 mb-4">
@@ -207,12 +210,12 @@ export class ChatDisplayManager {
                     <!-- Содержимое закладок -->
                     <div class="tab-content">
                         <!-- Сгенерированный промпт -->
-                        <div id="${uniqueId}-prompt" class="tab-panel">
+                        <div id="${uniqueId}-prompt" class="tab-panel" data-request-id="${data.request_id || ''}">
                             <div class="bg-gray-50 rounded-lg p-3">
-                                <p class="text-gray-800 whitespace-pre-wrap">${this.escapeHtml(
+                                <div class="formatted-content prompt-text text-gray-800">${this.formatText(
                                     data.generated_prompt ||
                                         data.generatedPrompt
-                                )}</p>
+                                )}</div>
                             </div>
                         </div>
 
@@ -222,18 +225,30 @@ export class ChatDisplayManager {
                                 ? `
                         <div id="${uniqueId}-reasoning" class="tab-panel hidden">
                             <div class="bg-blue-50 rounded-lg p-3">
-                                <p class="text-gray-700 text-sm whitespace-pre-wrap">${this.escapeHtml(
+                                <div class="formatted-content text-gray-700 text-sm">${this.formatText(
                                     data.reasoning
-                                )}</p>
+                                )}</div>
                             </div>
                         </div>
                         `
                                 : ""
                         }
                     </div>
-
+                </div>
                     <!-- Кнопки действий -->
-                    <div class="absolute bottom-3 right-3 flex gap-2">
+                    <div class="absolute bottom-1 right-5 flex gap-2">
+                        ${data.allow_edit && data.request_id ? `
+                        <button data-edit-prompt-button
+                                data-request-id="${data.request_id}"
+                                data-prompt-text="${this.escapeHtml(data.generated_prompt || data.generatedPrompt)}"
+                                class="p-2 text-gray-500 hover:text-gray-700 hover:bg-white/80 rounded-md transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 group"
+                                title="Редактировать промпт">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                        </button>
+                        ` : ''}
                         <button data-copy-button data-prompt-text="${this.escapeHtml(
                             data.generated_prompt || data.generatedPrompt
                         )}"
@@ -264,7 +279,7 @@ export class ChatDisplayManager {
                             </svg>
                         </button>
                     </div>
-                </div>
+
             </div>
         `;
 
@@ -325,9 +340,9 @@ export class ChatDisplayManager {
         const dividerDiv = document.createElement("div");
         dividerDiv.className = "flex items-center justify-center py-4";
         dividerDiv.innerHTML = `
-            <div class="flex-1 border-t border-gray-200"></div>
-            <div class="px-4 text-xs text-gray-400 bg-white">Следующий запрос</div>
-            <div class="flex-1 border-t border-gray-200"></div>
+            <div class="flex-1 border-t border-gray-300"></div>
+            <div class="px-4 text-xs text-gray-400 rounded-full border border-gray-300 bg-white/20">Уточняющий запрос</div>
+            <div class="flex-1 border-t border-gray-300"></div>
         `;
         this.chatMessagesContainer.appendChild(dividerDiv);
     }
@@ -336,6 +351,20 @@ export class ChatDisplayManager {
      * Настроить обработчики для кнопок сообщений
      */
     setupMessageButtons(messageDiv, promptText) {
+        // Кнопка редактирования
+        const editButton = messageDiv.querySelector("[data-edit-prompt-button]");
+        if (editButton) {
+            editButton.addEventListener("click", () => {
+                const requestId = editButton.getAttribute("data-request-id");
+                const promptText = editButton.getAttribute("data-prompt-text");
+                if (requestId && promptText && window.openEditPromptModal) {
+                    window.openEditPromptModal(requestId, promptText);
+                } else {
+                    console.error("Не удалось получить данные для редактирования:", { requestId, promptText });
+                }
+            });
+        }
+
         // Кнопка копирования
         const copyButton = messageDiv.querySelector("[data-copy-button]");
         if (copyButton) {
@@ -507,6 +536,48 @@ export class ChatDisplayManager {
         const div = document.createElement("div");
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    /**
+     * Форматировать текст с поддержкой Markdown
+     */
+    formatText(text) {
+        if (!text) return '';
+
+        let result = text
+            // Экранируем HTML
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            // Выделяем жирный текст
+            .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold">$1</strong>')
+            // Выделяем курсив
+            .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+            // Выделяем код
+            .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">$1</code>')
+            // Создаем маркированные списки из строк, начинающихся с - или •
+            .replace(/^[\s]*[-•]\s*(.+)$/gm, '<li>$1</li>')
+            // Создаем нумерованные списки
+            .replace(/^[\s]*(\d+)\.\s*(.+)$/gm, '<li>$1. $2</li>')
+            // Оборачиваем группы <li> в <ul> или <ol>
+            .replace(/(<li>\d+\..*?<\/li>)(?=\s*<li>\d+\.|$)/gs,
+                '<ol class="list-decimal list-inside space-y-2 my-4">$1</ol>')
+            .replace(/(<li>•.*?<\/li>)(?=\s*<li>•|$)/gs, '<ul class="list-disc list-inside space-y-2 my-4">$1</ul>')
+            // Обрабатываем одиночные элементы списка
+            .replace(/(<li>\d+\..*?<\/li>)/gs, '<ol class="list-decimal list-inside space-y-2 my-4">$1</ol>')
+            .replace(/(<li>•.*?<\/li>)/gs, '<ul class="list-disc list-inside space-y-2 my-4">$1</ul>')
+            // Выделяем заголовки (строки, заканчивающиеся на :)
+            .replace(/^(.+):\s*$/gm, '<h4 class="font-semibold text-gray-800 mt-3 mb-2 text-blue-700">$1</h4>')
+            // Выделяем цитаты (строки, начинающиеся с >)
+            .replace(/^>\s*(.+)$/gm,
+                '<blockquote class="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-2">$1</blockquote>')
+            // Создаем разделители
+            .replace(/^---$/gm, '<hr class="my-4 border-gray-300">')
+            // Выделяем ссылки
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g,
+                '<a href="$2" class="text-blue-600 hover:text-blue-800 underline" target="_blank">$1</a>');
+
+        return result;
     }
 
     /**

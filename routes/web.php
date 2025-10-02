@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AIController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\YandexController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,18 +28,34 @@ use App\Http\Controllers\Auth\YandexController;
  */
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // ============================================================================
 // API МАРШРУТЫ ДЛЯ ИИ-ФУНКЦИОНАЛЬНОСТИ
 // ============================================================================
 
 /**
- * Создание промпта через ИИ
+ * Создание промпта через ИИ для главной страницы
  * POST /generate-prompt
  * Обрабатывает запросы на генерацию промптов с учетом лимитов пользователей
+ * Поддерживает уточнения через parent_id
  */
-Route::post('/generate-prompt', [AIController::class, 'generatePrompt'])->name('generate-prompt');
+Route::post('/generate-prompt', [AIController::class, 'generatePromptForWelcomePage'])->name('generate-prompt');
+
+/**
+ * Создание промпта через ИИ для чата
+ * POST /chat/generate-prompt
+ * Обрабатывает запросы на генерацию промптов в режиме чата
+ * Поддерживает продолжение диалога через session_id
+ */
+Route::post('/chat/generate-prompt', [AIController::class, 'generatePromptForChat'])->name('chat.generate-prompt');
+
+/**
+ * Отправка отредактированного промпта в LLM
+ * POST /chat/send-edited-prompt
+ * Отправляет отредактированный пользователем промпт в LLM
+ */
+Route::post('/chat/send-edited-prompt', [AIController::class, 'sendEditedPrompt'])->name('chat.send-edited-prompt');
 
 /**
  * Получение информации о лимитах запросов
@@ -51,20 +68,16 @@ Route::get('/api/limits', [AIController::class, 'getLimits'])->name('api.limits'
  * API маршруты для работы с сессиями
  */
 Route::middleware(['auth'])->prefix('api/sessions')->group(function () {
-    Route::get('/', [App\Http\Controllers\SessionController::class, 'index'])->name('sessions.index');
-    Route::get('/{sessionId}', [App\Http\Controllers\SessionController::class, 'show'])->name('sessions.show');
-    Route::post('/', [App\Http\Controllers\SessionController::class, 'store'])->name('sessions.store');
-    Route::delete('/{sessionId}', [App\Http\Controllers\SessionController::class, 'destroy'])->name('sessions.destroy');
+    Route::get('/', [SessionController::class, 'index'])->name('sessions.index');
+    Route::get('/{sessionId}', [SessionController::class, 'show'])->name('sessions.show');
+    Route::post('/', [SessionController::class, 'store'])->name('sessions.store');
+    Route::delete('/{sessionId}', [SessionController::class, 'destroy'])->name('sessions.destroy');
 });
 
 // ============================================================================
 // АУТЕНТИФИЦИРОВАННЫЕ МАРШРУТЫ
 // ============================================================================
 
-/**
- * Панель управления пользователя
- * Доступна только аутентифицированным и верифицированным пользователям
- */
 Route::get('/chat', function () {
     return view('chat');
 })->middleware(['auth'])->name('chat');
@@ -117,6 +130,18 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
      * POST /admin/settings
      */
     Route::post('/settings', [AIController::class, 'updateSettings'])->name('settings.update');
+
+    /**
+     * Очистка кэша
+     * POST /admin/clear-cache
+     */
+    Route::post('/clear-cache', [AIController::class, 'clearCache'])->name('clear-cache');
+
+    /**
+     * Очистка логов
+     * POST /admin/clear-logs
+     */
+    Route::post('/clear-logs', [AIController::class, 'clearLogs'])->name('clear-logs');
 
     /**
      * Просмотр статистики запросов

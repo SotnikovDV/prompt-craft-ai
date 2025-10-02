@@ -60,6 +60,7 @@
    DB_PASSWORD=your_password
    
    PERPLEXITY_API_KEY=your_perplexity_api_key
+   OPENROUTER_API_KEY=your_openrouter_key
    ```
 
 5. **Настройте базу данных**

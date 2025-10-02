@@ -16,6 +16,8 @@ class PromptRequest extends Model
         'clarification',
         'full_request',
         'domain',
+        'gen_provider',
+        'gen_model',
         'model',
         'style',
         'format',
@@ -67,7 +69,7 @@ class PromptRequest extends Model
 
         return PromptRequest::where(function ($query) use ($rootRequest) {
             $query->where('id', $rootRequest->id)
-                  ->orWhere('parent_id', $rootRequest->id);
+                ->orWhere('parent_id', $rootRequest->id);
         })->orderBy('created_at')->get();
     }
 
@@ -106,6 +108,7 @@ class PromptRequest extends Model
     public static function getTodayCount(string $sessionId): int
     {
         $today = now()->startOfDay();
+
         return self::where('session_id', $sessionId)
             ->where('created_at', '>=', $today)
             ->count();

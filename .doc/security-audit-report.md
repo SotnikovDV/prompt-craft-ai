@@ -83,6 +83,7 @@ APP_URL=https://yourdomain.com
 
 # Настроить реальные ключи
 PERPLEXITY_API_KEY=your_real_key_here
+OPENROUTER_API_KEY=your_openrouter_key
 
 # Настроить почту
 MAIL_MAILER=smtp

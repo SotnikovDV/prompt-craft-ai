@@ -74,6 +74,7 @@ export class InfoModalManager {
             showCancel = false,
             confirmText = 'OK',
             cancelText = 'Отмена',
+            confirmClass = null,
             onConfirm = null,
             onCancel = null,
             onClose = null
@@ -88,7 +89,7 @@ export class InfoModalManager {
         });
 
         this.currentCallback = { onConfirm, onCancel, onClose };
-        this.updateContent(title, message, type, showCancel, confirmText, cancelText);
+        this.updateContent(title, message, type, showCancel, confirmText, cancelText, confirmClass);
 
         if (this.modal) {
             this.modal.classList.remove('hidden');
@@ -141,7 +142,7 @@ export class InfoModalManager {
         this.hide();
     }
 
-    updateContent(title, message, type, showCancel, confirmText, cancelText) {
+    updateContent(title, message, type, showCancel, confirmText, cancelText, confirmClass = null) {
         if (this.modalTitle) {
             this.modalTitle.textContent = title;
         }
@@ -151,7 +152,7 @@ export class InfoModalManager {
         }
 
         this.updateIcon(type);
-        this.updateButtons(showCancel, confirmText, cancelText);
+        this.updateButtons(showCancel, confirmText, cancelText, confirmClass);
     }
 
     updateIcon(type) {
@@ -191,7 +192,7 @@ export class InfoModalManager {
         this.modalIcon.innerHTML = config.icon;
     }
 
-    updateButtons(showCancel, confirmText, cancelText) {
+    updateButtons(showCancel, confirmText, cancelText, confirmClass = null) {
         if (this.modalCancel) {
             if (showCancel) {
                 this.modalCancel.classList.remove('hidden');
@@ -203,6 +204,17 @@ export class InfoModalManager {
 
         if (this.modalConfirm) {
             this.modalConfirm.textContent = confirmText;
+
+            // Применяем кастомный класс для кнопки подтверждения (например, красный для удаления)
+            if (confirmClass) {
+                // Удаляем стандартные классы кнопки
+                this.modalConfirm.className = this.modalConfirm.className.replace(/bg-\w+-\d+/g, '').replace(/hover:bg-\w+-\d+/g, '');
+                // Добавляем кастомные классы
+                this.modalConfirm.classList.add(...confirmClass.split(' '));
+            } else {
+                // Возвращаем стандартные классы
+                this.modalConfirm.className = 'px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors';
+            }
         }
     }
 
@@ -222,15 +234,34 @@ export class InfoModalManager {
         this.show({ title, message, type: 'warning', ...options });
     }
 
+    /**
+     * Показать модальное окно подтверждения с промисом
+     *
+     * @param {string} title - Заголовок окна
+     * @param {string} message - Текст сообщения
+     * @param {Object} options - Дополнительные опции
+     * @returns {Promise<boolean>} - true если пользователь подтвердил, false если отменил
+     */
     showConfirm(title, message, options = {}) {
-        this.show({
-            title,
-            message,
-            type: 'warning',
-            showCancel: true,
-            confirmText: options.confirmText || 'Подтвердить',
-            cancelText: options.cancelText || 'Отмена',
-            ...options
+        return new Promise((resolve) => {
+            this.show({
+                title,
+                message,
+                type: 'warning',
+                showCancel: true,
+                confirmText: options.confirmText || 'Подтвердить',
+                cancelText: options.cancelText || 'Отмена',
+                onConfirm: () => {
+                    resolve(true);
+                },
+                onCancel: () => {
+                    resolve(false);
+                },
+                onClose: () => {
+                    resolve(false);
+                },
+                ...options
+            });
         });
     }
 

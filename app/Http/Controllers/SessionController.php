@@ -14,13 +14,13 @@ use Illuminate\Support\Str;
 class SessionController extends Controller
 {
     /**
-     * Получить историю сессий пользователя
+     * Получить историю сессий пользователя (до 10 сессий)
      */
     public function index(): JsonResponse
     {
         $userId = Auth::id();
 
-        if (!$userId) {
+        if (! $userId) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -37,14 +37,14 @@ class SessionController extends Controller
                 DB::raw('COUNT(*) as requests_count'),
                 DB::raw('MAX(original_request) as latest_request'),
                 DB::raw('MAX(created_at) as latest_created_at'),
-                DB::raw('DATE(MAX(created_at)) as session_date')
+                DB::raw('DATE(MAX(created_at)) as session_date'),
             ])
             ->groupBy([
                 'session_id',
                 'domain',
                 'model',
                 'style',
-                'format'
+                'format',
             ])
             ->get();
 
@@ -60,24 +60,24 @@ class SessionController extends Controller
                 DB::raw('COUNT(*) as requests_count'),
                 DB::raw('MAX(original_request) as latest_request'),
                 DB::raw('MAX(created_at) as latest_created_at'),
-                DB::raw('DATE(MAX(created_at)) as session_date')
+                DB::raw('DATE(MAX(created_at)) as session_date'),
             ])
             ->groupBy([
                 'domain',
                 'model',
                 'style',
                 'format',
-                DB::raw('DATE(created_at)')
+                DB::raw('DATE(created_at)'),
             ])
             ->get();
 
         // Объединяем и сортируем все сессии
         $sessions = $regularSessions->concat($virtualSessions)
             ->sortByDesc('latest_created_at')
-            ->take(20)
+            ->take(10)
             ->map(function ($session) {
                 // Создаем виртуальный session_id если его нет
-                $sessionId = $session->session_id ?: 'daily_' . $session->session_date . '_' . substr(md5($session->latest_request), 0, 8);
+                $sessionId = $session->session_id ?: 'daily_'.$session->session_date.'_'.substr(md5($session->latest_request), 0, 8);
 
                 // Определяем название сессии на основе домена или первого запроса
                 $sessionName = $this->generateSessionName($session);
@@ -102,7 +102,7 @@ class SessionController extends Controller
 
         return response()->json([
             'sessions' => $sessions->values()->toArray(),
-            'total' => $sessions->count()
+            'total' => $sessions->count(),
         ]);
     }
 
@@ -113,7 +113,7 @@ class SessionController extends Controller
     {
         $userId = Auth::id();
 
-        if (!$userId) {
+        if (! $userId) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -131,9 +131,9 @@ class SessionController extends Controller
 
             // Сначала получаем все запросы без session_id на эту дату
             $allRequests = $requests->whereNull('session_id')
-                                   ->whereDate('created_at', $date)
-                                   ->orderBy('created_at', 'desc')
-                                   ->get();
+                ->whereDate('created_at', $date)
+                ->orderBy('created_at', 'desc')
+                ->get();
 
             // Группируем по домену и находим группу, которая соответствует данному sessionId
             $groupedRequests = $allRequests->groupBy('domain');
@@ -142,7 +142,7 @@ class SessionController extends Controller
             $requests = collect();
             foreach ($groupedRequests as $domain => $domainRequests) {
                 // Создаем виртуальный ID для этой группы
-                $virtualId = 'daily_' . $date . '_' . substr(md5($domainRequests->first()->original_request), 0, 8);
+                $virtualId = 'daily_'.$date.'_'.substr(md5($domainRequests->first()->original_request), 0, 8);
 
                 if ($virtualId === $sessionId) {
                     $requests = $domainRequests;
@@ -157,8 +157,8 @@ class SessionController extends Controller
         } else {
             // Обычная сессия по session_id
             $requests = $requests->where('session_id', $sessionId)
-                                ->orderBy('created_at', 'desc')
-                                ->get();
+                ->orderBy('created_at', 'desc')
+                ->get();
         }
 
         if ($requests->isEmpty()) {
@@ -186,7 +186,7 @@ class SessionController extends Controller
                     'questions' => $this->decodeQuestions($request->questions),
                     'created_at' => $request->created_at,
                 ];
-            })
+            }),
         ];
 
         return response()->json($sessionInfo);
@@ -199,7 +199,7 @@ class SessionController extends Controller
     {
         $userId = Auth::id();
 
-        if (!$userId) {
+        if (! $userId) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -219,7 +219,7 @@ class SessionController extends Controller
 
         return response()->json([
             'session_id' => $sessionId,
-            'message' => 'Session created successfully'
+            'message' => 'Session created successfully',
         ], 201);
     }
 
@@ -230,7 +230,7 @@ class SessionController extends Controller
     {
         $userId = Auth::id();
 
-        if (!$userId) {
+        if (! $userId) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -238,14 +238,14 @@ class SessionController extends Controller
         $deletedCount = PromptRequest::where('user_id', $userId)
             ->where(function ($query) use ($sessionId) {
                 $query->where('session_id', $sessionId)
-                      ->orWhere(function ($subQuery) use ($sessionId) {
-                          // Для виртуальных сессий по дате
-                          if (str_starts_with($sessionId, 'daily_')) {
-                              $date = substr($sessionId, 6, 10);
-                              $subQuery->whereNull('session_id')
-                                       ->whereDate('created_at', $date);
-                          }
-                      });
+                    ->orWhere(function ($subQuery) use ($sessionId) {
+                        // Для виртуальных сессий по дате
+                        if (str_starts_with($sessionId, 'daily_')) {
+                            $date = substr($sessionId, 6, 10);
+                            $subQuery->whereNull('session_id')
+                                ->whereDate('created_at', $date);
+                        }
+                    });
             })
             ->delete();
 
@@ -255,7 +255,7 @@ class SessionController extends Controller
 
         return response()->json([
             'message' => 'Session deleted successfully',
-            'deleted_requests' => $deletedCount
+            'deleted_requests' => $deletedCount,
         ]);
     }
 
@@ -276,7 +276,8 @@ class SessionController extends Controller
 
         // Обрезаем первый запрос до 30 символов
         $request = $session->latest_request ?? 'Новая сессия';
-        return mb_substr($request, 0, 30) . (mb_strlen($request) > 30 ? '...' : '');
+
+        return mb_substr($request, 0, 30).(mb_strlen($request) > 30 ? '...' : '');
     }
 
     /**
@@ -318,6 +319,7 @@ class SessionController extends Controller
         // Если строка, пытаемся декодировать JSON
         if (is_string($questions)) {
             $decoded = json_decode($questions, true);
+
             return is_array($decoded) ? $decoded : [];
         }
 

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
 /**
- * Сервис для работы с Perplexity API
+ * Сервис для работы с OpenRouter API
  */
-class PerplexityService implements LLMServiceInterface
+class OpenRouterService implements LLMServiceInterface
 {
     public function __construct(
         protected string $apiKey,
@@ -24,6 +24,8 @@ class PerplexityService implements LLMServiceInterface
         $response = Http::withHeaders([
             'Authorization' => "Bearer {$this->apiKey}",
             'Content-Type' => 'application/json',
+            'HTTP-Referer' => config('app.url'),
+            'X-Title' => config('app.name'),
         ])->post("{$this->baseUrl}/chat/completions", [
             'model' => $model,
             'messages' => [
@@ -41,7 +43,7 @@ class PerplexityService implements LLMServiceInterface
         ]);
 
         if (! $response->successful()) {
-            throw new RuntimeException('Perplexity error: '.$response->body());
+            throw new RuntimeException('OpenRouter error: '.$response->body());
         }
 
         return $response->json('choices.0.message.content');

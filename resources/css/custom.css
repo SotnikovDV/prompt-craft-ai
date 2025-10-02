@@ -37,6 +37,10 @@
         @apply shadow-xl transform -translate-y-1;
     }
 
+    .card-header-brand {
+        @apply bg-gradient-to-r from-blue-50 to-orange-50 border-b border-gray-200;
+    }
+
     /* Градиентные фоны */
     .bg-gradient-brand {
         @apply bg-gradient-to-r from-blue-500/30 via-blue-300/20 to-orange-500/30
